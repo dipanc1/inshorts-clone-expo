@@ -1,9 +1,14 @@
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { useContext } from 'react';
+import Context, { NewsContext } from './API/Context';
 import InshortTabs from './components/InshortTabs';
 
-export default function App() {
+function App() {
+
+  const { darkTheme } = useContext(NewsContext);
+
   return (
-    <View style={{...styles.container,backgroundColor:'#282c35'}}>
+    <View style={{ ...styles.container, backgroundColor: darkTheme ? '#282c35' : 'white' }}>
       <InshortTabs />
     </View>
   );
@@ -15,3 +20,11 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight,
   },
 });
+
+export default () => {
+  return (
+    <Context>
+      <App />
+    </Context>
+  );
+}
